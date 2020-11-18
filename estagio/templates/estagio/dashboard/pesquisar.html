@@ -1,0 +1,47 @@
+{% extends "estagio/dashboard/base.html" %}
+
+{% block content %}
+
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Pesquisar</h1>
+    </div>
+
+    <form method="GET" action="#">
+        <div class="form-group row">
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <input name="matricula" type="search" class="col-8 form-control" id="matricula" placeholder="Matrícula">
+            <div class="col-1">
+                <button type="submit" class="btn btn-primary">Pesquisar</button>
+            </div>
+            &nbsp;&nbsp;&nbsp;
+            <div class="col-1">
+                <a class="btn  btn-info" href="/pesquisar/">Mostrar todos</a>
+            </div>
+        </div>
+    </form>
+    
+    <table class="table">
+	
+		<tr>
+			<th scope="col">Nome</th>
+			<th scope="col">Matrícula</th>
+			<th scope="col">Curso</th>
+			<th scope="col">Ações</th>
+		</tr>
+		{% for a, m, c in alu %}
+		<tr>
+			<td>{{ a }}</td>
+			<td>{{ m }}</td>
+			<td>{{ c }}</td>
+			<td>
+			<a class="btn  btn-outline-info" href="/detalhes/{{m}}/">Informações</a>
+			</td>
+		</tr>
+		{% endfor %}
+		
+    </table>
+
+</main>
+
+{% endblock %}

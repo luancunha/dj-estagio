@@ -1,0 +1,48 @@
+{% extends "estagio/base.html" %}
+
+{% block content %}
+
+{% for message in messages %}
+
+<div class="row justify-content-center">
+    <div class="col-5" style="margin-top: 5%; margin-bottom: -5%;">
+        <div class="alert alert-danger">
+            <a class="close" href="#" data-dismiss="alert">×</a>
+            {{ message }}
+        </div>
+    </div>
+</div>
+
+{% endfor %}
+
+<div class="row justify-content-center">
+    <div class="col-5" style="margin-top: 5%;">
+        <form class="form-signin" method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+
+            <div class="text-center mb-4">
+                <h1 class="h3 mb-3 font-weight-normal">Login</h1>
+            </div>
+
+            <div class="form-label-group">
+                <label for="username"></label>
+                <input id="username" type="text" name="username" class="form-control" placeholder="Usúario" required autofocus>
+            </div>
+
+            <div class="form-label-group">
+                <label for="password"></label>
+                <input id="password" type="password" name="password" class="form-control" placeholder="Senha" required>
+            </div>
+
+            <div class="checkbox mb-3">
+                <label>
+                    <input type="checkbox" value="lembrar de mim"> Lembrar de mim
+                </label>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
+            <p class="mt-5 mb-3 text-muted text-center">&copy; Luan - 2020</p>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

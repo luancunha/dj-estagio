@@ -1,0 +1,79 @@
+{% extends "estagio/dashboard/base.html" %}
+
+{% block content %}
+
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Cadastro de Alunos</h1>
+    </div>
+
+    {% for message in messages %}
+
+    <div class="row justify-content-center">
+        <div class="col-5">
+            <div class="alert alert-info">
+                <a class="close" href="#" data-dismiss="alert">×</a>
+                {{ message }}
+            </div>
+        </div>
+    </div>
+
+    {% endfor %}
+    
+    <form method="POST" action="/cad_alunos/">
+        {% csrf_token %}
+
+        <div class="form-group row">
+            {{ form.matricula.errors }}
+            <label for="matricula" class="col-1 col-form-label">Matrícula</label>
+            <div class="col-4">
+                <input id="matricula" type="number" name="matricula" class="form-control" required>
+            </div>
+        </div>
+        <div class="form-group row">
+            {{ form.nome.errors }}
+            <label for="nome" class="col-1 col-form-label">Nome</label>
+            <div class="col-4">
+                <input id="nome" type="text" name="nome" class="form-control" required>
+            </div>
+        </div>
+        <div class="form-group row">
+            {{ form.sexo.errors }}
+            <label for="sexo" class="col-1 col-form-label">Sexo</label>
+            <div class="col-4">
+                <input id="sexo" type="text" name="sexo" class="form-control" required>
+            </div>
+        </div>
+        <div class="form-group row">
+            {{ form.datanasc.errors }}
+            <label for="datanasc" class="col-1 col-form-label">Data de nascimento</label>
+            <div class="col-4">
+                <input id="datanasc" type="date" name="datanasc" class="form-control" required>
+            </div>
+        </div>
+        <div class="form-group row">
+            {{ form.periodo.errors }}
+            <label for="periodo" class="col-1 col-form-label">Período</label>
+            <div class="col-4">
+                <input id="periodo" type="number" name="periodo" class="form-control" required>
+            </div>
+        </div>
+        <div class="form-group row">
+            {{ form.curso.errors }}
+            <label for="curso" class="col-1 col-form-label">Curso</label>
+            <div class="col-4">
+                <select id="curso" name="curso" class="form-control" required>
+                    <option></option>
+                    {% for c in curs %}
+                    <option value="{{ c.codigo }}">{{ c.nome }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+      </form>
+
+</main>
+
+{% endblock %}

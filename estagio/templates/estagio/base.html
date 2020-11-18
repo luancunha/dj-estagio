@@ -1,0 +1,45 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <title>Estagios</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'estagio/css/bootstrap.css' %}">
+    
+</head>
+
+<body>
+    <div>
+        <nav class="navbar navbar-expand navbar-light" style="background-color: #007bff;">
+            <span class="navbar-brand col-sm-3 col-md-2 mr-0">Control Stage</span>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login/">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/">Admin</a>
+                    </li>
+                </ul>
+                {% if request.user.is_active %}
+                <span class="navbar-text text-white">
+                    {{ user.username }}
+                </span>
+                {% endif %}
+            </div>
+        </nav>
+    </div>
+
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+
+</body>
+</html>

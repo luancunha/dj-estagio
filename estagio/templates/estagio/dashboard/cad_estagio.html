@@ -1,0 +1,102 @@
+{% extends "estagio/dashboard/base.html" %}
+
+{% block content %}
+
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Cadastro de Estagio</h1>
+    </div>
+
+    {% for message in messages %}
+
+    <div class="row justify-content-center">
+        <div class="col-5">
+            <div class="alert alert-info">
+                <a class="close" href="#" data-dismiss="alert">×</a>
+                {{ message }}
+            </div>
+        </div>
+    </div>
+
+    {% endfor %}
+
+    <form method="POST" action="{% url 'cad_estagio' %}">
+        {% csrf_token %}
+
+        <div class="form-group row">
+            {{ form.aluno.errors }}
+            <label for="aluno" class="col-1 col-form-label">Alunos</label>
+            <div class="col-4">
+                <select id="aluno" name="aluno" class="form-control" required>
+                    <option></option>
+                    {% for a in alu %}
+                    <option value="{{ a.matricula }}">{{ a.nome }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            {{ form.profest.errors }}
+            <label for="profest" class="col-1 col-form-label">Professor Coordenador</label>
+            <div class="col-4">
+                <select id="profest" name="profest" class="form-control" required>
+                    <option></option>
+                    {% for p in prof %}
+                    <option value="{{ p.masp }}">{{ p.nome }} - {{ p.curso }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            {{ form.remunerado.errors }}
+            <label for="remunerado" class="col-1 col-form-label">Remunerado</label>
+            <div class="col-4">
+                <select id="remunerado" name="remunerado" class="form-control" required>
+                    <option></option>
+                    <option value="S">Sim</option>
+                    <option value="N">Não</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            {{ form.valor.errors }}
+            <label for="valor" class="col-1 col-form-label">Valor</label>
+            <div class="col-4">
+                <input id="valor" type="number" name="valor" class="form-control" required>
+            </div>
+        </div>
+        <div class="form-group row">
+            {{ form.empresa.errors }}
+            <label for="empresa" class="col-1 col-form-label">Empresa</label>
+            <div class="col-4">
+                <input id="empresa" type="text" name="empresa" class="form-control" required>
+            </div>
+        </div>
+        <div class="form-group row">
+            {{ form.cargahr.errors }}
+            <label for="cargahr" class="col-1 col-form-label">Carga Horária</label>
+            <div class="col-4">
+                <input id="cargahr" type="number" name="cargahr" class="form-control" required>
+            </div>
+        </div>
+        <div class="form-group row">
+            {{ form.descr_est.errors }}
+            <label for="descr_est" class="col-1 col-form-label">Descrição</label>
+            <div class="col-4">
+                <input id="descr_est" type="text" name="descr_est" class="form-control" required>
+            </div>
+        </div>
+        <div class="form-group row">
+            {{ form.resp_est.errors }}
+            <label for="resp_est" class="col-1 col-form-label">Responsável</label>
+            <div class="col-4">
+                <input id="resp_est" type="text" name="resp_est" class="form-control" required>
+            </div>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+      </form>
+
+</main>
+
+{% endblock %}

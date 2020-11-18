@@ -1,0 +1,62 @@
+{% extends "estagio/dashboard/base.html" %}
+
+{% block content %}
+
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Detalhes do Estágio</h1>
+
+        <a class="btn  btn-info" href="/pesquisar/">Voltar</a>
+    </div>
+
+    {% for e in est %}
+    <form>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label>Nome</label>
+            <input type="text" class="form-control" id="nome" value="{{e.aluno}}" disabled>
+          </div>
+          <div class="form-group col-md-6">
+            <label>Professor Coordenador</label>
+            <input type="text" class="form-control" id="profest" value="{{e.profest}}" disabled>
+          </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Empresa</label>
+                <input type="text" class="form-control" id="empresa" value="{{e.empresa}}" disabled>
+            </div>
+            <div class="form-group col-md-3">
+                <label>Remunerado</label>
+                {% if e.remunerado == 'S' %}
+                    <input type="text" class="form-control" id="remunerado" value="Sim"  disabled>
+                {% else %}
+                    <input type="text" class="form-control" id="remunerado" value="Não" disabled>
+                {% endif %}
+            </div>
+            <div class="form-group col-md-3">
+                <label>Valor</label>
+                <input type="text" class="form-control" id="valor" value="{{e.valor}}" disabled>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+              <label>Responsável</label>
+              <input type="text" class="form-control" id="resp_est" value="{{e.resp_est}}" disabled>
+            </div>
+            <div class="form-group col-md-6">
+              <label>Carga horária</label>
+              <input type="text" class="form-control" id="cargahr" value="{{e.cargahr}}" disabled>
+            </div>
+          </div>
+        <div class="form-group">
+            <label>Descrição</label>
+            <input type="text" class="form-control" id="descr_est" value="{{e.descr_est}}" disabled>
+        </div>
+        
+      </form>
+      {% endfor %}
+
+</main>
+
+{% endblock %}

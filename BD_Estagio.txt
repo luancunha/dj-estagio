@@ -1,0 +1,60 @@
+BD - estagio
+
+psql -U postgres estagio
+
+Cadastros de faculdades e cursos.
+Cadastro do professor coordernado de estagio do curso.
+Cadastro de alunos.
+Cadastro do estagio.
+
+Interfaces:
+Tela incial
+Cadastros pelo admin
+Busca de estagio
+Dados do estagio
+
+
+
+create table faculdades (
+codigo integer primary key, 
+nome varchar(50) not null, 
+cidade varchar(30) not null,
+estado varchar(20) not null, 
+pais varchar(20) not null);
+
+create table cursos (
+codigo serial primary key, 
+nome varchar(50) not null, 
+departamento varchar(30) not null, 
+faculdade integer not null, 
+foreign key (faculdade) references faculdades);
+
+create table profcoorest (
+masp integer primary key, 
+nome varchar(50) not null, 
+curso integer not null, 
+foreign key (curso) references cursos);
+
+create table alunos (
+matricula integer primary key, 
+nome varchar(100) not null, 
+sexo char(1) not null, 
+datanasc date not null, 
+curso integer not null, 
+foreign key (curso) references cursos, 
+periodo integer not null);
+
+create table estagio (
+codigo serial primary key, 
+aluno integer not null, 
+foreign key (aluno) references alunos, 
+profest integer not null, 
+foreign key (profest) references profcoorest, 
+remunerado char(1) not null, 
+valor decimal(6,2), 
+empresa varchar(30) not null, 
+cargahr integer not null, 
+descr_est varchar(256) not null, 
+resp_est varchar(50) not null);
+
+SELECT a.nome, a.matricula, c.nome FROM alunos as A INNER JOIN cursos as C ON a.curso=c.codigo INNER JOIN estagio as E ON a.matricula=e.aluno ORDER BY a.nome LIMIT 7;
